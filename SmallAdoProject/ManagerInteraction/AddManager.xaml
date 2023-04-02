@@ -1,0 +1,31 @@
+﻿<Window x:Class="SmallAdoProject.ManagerInteraction.AddManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmallAdoProject.ManagerInteraction"
+        mc:Ignorable="d"
+        Title="AddManager" Height="450" Width="300" Loaded="Window_Loaded">
+    <Grid>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label FontWeight="DemiBold">Name: </Label>
+            <TextBox x:Name="Box_Name" Width="200"></TextBox>
+            <Label Width="210" FontWeight="DemiBold">Surname:</Label>
+            <TextBox x:Name="Box_Surname" Width="200"></TextBox>
+            <Label Width="210" FontWeight="DemiBold">Phone:</Label>
+            <TextBox x:Name="Box_Phone" Width="200"></TextBox>
+            <Label Width="210" FontWeight="DemiBold">Address:</Label>
+            <TextBox x:Name="Box_Address" Width="200"></TextBox>
+            <Label Width="210" FontWeight="DemiBold">Email:</Label>
+            <TextBox x:Name="Box_Email" Width="200"></TextBox>
+            <Label Width="210"  FontWeight="DemiBold">Login:</Label>
+            <TextBox x:Name="Box_Login" Width="200"></TextBox>
+            <Label Width="210" FontWeight="DemiBold">Password:</Label>
+            <TextBox x:Name="Box_Password" Width="200"></TextBox>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="Button_Cancel" Width="90" Margin="5,20,20,0" Click="Button_Cancel_Click">Cancel</Button>
+                <Button x:Name="Button_Create" Width="90" Margin="0,20,0,0" Click="Button_Create_Click">Create</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

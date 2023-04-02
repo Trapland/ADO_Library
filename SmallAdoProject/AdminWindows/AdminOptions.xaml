@@ -1,0 +1,16 @@
+﻿<Window x:Class="SmallAdoProject.AdminOptions"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmallAdoProject"
+        mc:Ignorable="d"
+        Title="AdminOptions" Height="250" Width="300" Loaded="Window_Loaded">
+    <Grid>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button x:Name="Add_manager" Width="200" Click="Add_manager_Click">Add new manager</Button>
+            <Button x:Name="Edit_manager" Margin="0,20,0,0" Width="200" Click="Edit_manager_Click">Edit manager</Button>
+            <Button x:Name="Delete_manager" Margin="0,20,0,0" Width="200" Click="Delete_manager_Click">Delete manager</Button>
+        </StackPanel>
+    </Grid>
+</Window>
