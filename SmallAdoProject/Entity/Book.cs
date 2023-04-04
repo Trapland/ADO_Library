@@ -22,24 +22,24 @@ namespace SmallAdoProject.Entity
         public Book()
         {
             ID = Guid.NewGuid();
-            Title = null!;
-            Author = null!;
-            Genre = null!;
-            SubGenre = null!;
+            Title = "";
+            Author = "";
+            Genre = "";
+            SubGenre = "";
             Height = 0;
-            Publisher = null!;
+            Publisher = "";
             Total_Count = 0;
             Cuurent_Count = 0;
         }
         public Book(SqlDataReader reader)
         {
             ID = reader.GetGuid("ID");
-            Title = reader.IsDBNull("Title") ? null : reader.GetString("Title");
-            Author = reader.IsDBNull("Author") ? null : reader.GetString("Author");
-            Genre = reader.IsDBNull("Genre") ? null : reader.GetString("Genre");
-            SubGenre = reader.IsDBNull("SubGenre") ? null : reader.GetString("SubGenre");
+            Title = reader.IsDBNull("Title") ? "" : reader.GetString("Title");
+            Author = reader.IsDBNull("Author") ? "" : reader.GetString("Author");
+            Genre = reader.IsDBNull("Genre") ? "" : reader.GetString("Genre");
+            SubGenre = reader.IsDBNull("SubGenre") ? "" : reader.GetString("SubGenre");
             Height = reader.GetInt32("Height"); ;
-            Publisher = reader.IsDBNull("Publisher") ? null : reader.GetString("Publisher");
+            Publisher = reader.IsDBNull("Publisher") ? "" : reader.GetString("Publisher");
             Total_Count = reader.GetInt32("Total_Count"); ;
             Cuurent_Count = reader.GetInt32("Cuurent_Count"); ;
         }

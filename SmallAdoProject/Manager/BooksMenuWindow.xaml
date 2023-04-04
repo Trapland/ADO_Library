@@ -13,29 +13,46 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Content="Books" FontSize="22" FontWeight="DemiBold" Grid.Column="1"/>
-                <Button x:Name="Button_book_add" Content="Add book" FontSize="22" FontWeight="DemiBold" Grid.Column="2" Click="Button_book_add_Click"/>
+                <Label Content="Books" FontSize="22" FontWeight="DemiBold" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+                <Button x:Name="Button_book_give" Content="Give book" FontSize="22" FontWeight="DemiBold" Grid.Column="3" Click="Button_book_give_Click"/>
+                <Button x:Name="Button_book_return" Content="Return book" FontSize="22" FontWeight="DemiBold" Grid.Column="4" Click="Button_book_return_Click"/>
+                <Button x:Name="Button_book_create" Content="Add new book" FontSize="22" FontWeight="DemiBold" Grid.Column="5" Click="Button_book_add_Click"/>
+                <TextBox x:Name="TextBox_Search" FontSize="14" FontWeight="DemiBold" Grid.Column="6" TextChanged="TextBox_Search_TextChanged"/>
+                <ComboBox x:Name="ComboBox_SearchCategory" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="22" FontWeight="DemiBold" Grid.Column="7" SelectedIndex="0" SelectionChanged="ComboBox_SearchCategory_SelectionChanged">
+                    <ComboBoxItem>Title</ComboBoxItem>
+                    <ComboBoxItem>Author</ComboBoxItem>
+                    <ComboBoxItem>Genre</ComboBoxItem>
+                    <ComboBoxItem>SubGenre</ComboBoxItem>
+                    <ComboBoxItem>Publisher</ComboBoxItem>
+                </ComboBox>
             </Grid>
-            <ListView MaxHeight="350" ItemsSource="{Binding Books}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListView x:Name="lv" MaxHeight="350" ItemsSource="{Binding Books}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible" GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Title"
-                                        DisplayMemberBinding="{Binding Path=Title}"></GridViewColumn>
+                                        DisplayMemberBinding="{Binding Path=Title}" Width="250"></GridViewColumn>
                         <GridViewColumn Header="Author"
-                                        DisplayMemberBinding="{Binding Path=Author}"></GridViewColumn>
+                                        DisplayMemberBinding="{Binding Path=Author}" Width="200" ></GridViewColumn>
                         <GridViewColumn Header="Genre"
-                                        DisplayMemberBinding="{Binding Path=Genre}"></GridViewColumn>
+                                        DisplayMemberBinding="{Binding Path=Genre}" Width="100"></GridViewColumn>
                         <GridViewColumn Header="SubGenre"
-                                        DisplayMemberBinding="{Binding Path=SubGenre}"></GridViewColumn>
+                                        DisplayMemberBinding="{Binding Path=SubGenre}" Width="150"></GridViewColumn>
                         <GridViewColumn Header="Height"
-                                        DisplayMemberBinding="{Binding Path=Height}"></GridViewColumn>
+                                        DisplayMemberBinding="{Binding Path=Height}" Width="100"></GridViewColumn>
                         <GridViewColumn Header="Publisher"
-                                        DisplayMemberBinding="{Binding Path=Publisher}"></GridViewColumn>
+                                        DisplayMemberBinding="{Binding Path=Publisher}" Width="150"></GridViewColumn>
                         <GridViewColumn Header="Total_Count"
-                                        DisplayMemberBinding="{Binding Path=Total_Count}"></GridViewColumn>
+                                        DisplayMemberBinding="{Binding Path=Total_Count}" Width="100"></GridViewColumn>
                         <GridViewColumn Header="Cuurent_Count"
-                                        DisplayMemberBinding="{Binding Path=Cuurent_Count}"></GridViewColumn>
+                                        DisplayMemberBinding="{Binding Path=Cuurent_Count}" Width="100"></GridViewColumn>
 
 
                     </GridView>
