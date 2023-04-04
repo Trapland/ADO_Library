@@ -21,12 +21,13 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Content="Books" FontSize="22" FontWeight="DemiBold" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
-                <Button x:Name="Button_book_give" Content="Give book" FontSize="22" FontWeight="DemiBold" Grid.Column="3" Click="Button_book_give_Click"/>
-                <Button x:Name="Button_book_return" Content="Return book" FontSize="22" FontWeight="DemiBold" Grid.Column="4" Click="Button_book_return_Click"/>
-                <Button x:Name="Button_book_create" Content="Add new book" FontSize="22" FontWeight="DemiBold" Grid.Column="5" Click="Button_book_add_Click"/>
-                <TextBox x:Name="TextBox_Search" FontSize="14" FontWeight="DemiBold" Grid.Column="6" TextChanged="TextBox_Search_TextChanged"/>
-                <ComboBox x:Name="ComboBox_SearchCategory" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="22" FontWeight="DemiBold" Grid.Column="7" SelectedIndex="0" SelectionChanged="ComboBox_SearchCategory_SelectionChanged">
+                <Label Content="Books" FontSize="16" FontWeight="DemiBold" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+                <Button x:Name="Button_book_give" Content="Give book" FontSize="16" FontWeight="DemiBold" Grid.Column="3" Click="Button_book_give_Click"/>
+                <Button x:Name="Button_book_return" Content="Return book" FontSize="16" FontWeight="DemiBold" Grid.Column="4" Click="Button_book_return_Click"/>
+                <Button x:Name="Button_book_create" Content="Add new book" FontSize="16" FontWeight="DemiBold" Grid.Column="5" Click="Button_book_add_Click"/>
+                <Button x:Name="Button_user_create" Content="Add new user" FontSize="16" FontWeight="DemiBold" Grid.Column="6" Click="Button_user_create_Click"/>
+                <TextBox x:Name="TextBox_Search" FontSize="14" FontWeight="DemiBold" Grid.Column="8" TextChanged="TextBox_Search_TextChanged"/>
+                <ComboBox x:Name="ComboBox_SearchCategory" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" FontWeight="DemiBold" Grid.Column="9" SelectedIndex="0" SelectionChanged="ComboBox_SearchCategory_SelectionChanged">
                     <ComboBoxItem>Title</ComboBoxItem>
                     <ComboBoxItem>Author</ComboBoxItem>
                     <ComboBoxItem>Genre</ComboBoxItem>

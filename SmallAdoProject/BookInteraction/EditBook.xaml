@@ -1,0 +1,33 @@
+﻿<Window x:Class="SmallAdoProject.BookInteraction.EditBook"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmallAdoProject.BookInteraction"
+        mc:Ignorable="d"
+        Title="EditBook" Height="450" Width="300" Loaded="Window_Loaded">
+    <Grid>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label FontWeight="DemiBold">Title:</Label>
+            <TextBox x:Name="Box_Title" Width="200"></TextBox>
+            <Label Width="210" FontWeight="DemiBold">Author:</Label>
+            <TextBox x:Name="Box_Author" Width="200"></TextBox>
+            <Label Width="210" FontWeight="DemiBold">Genre:</Label>
+            <TextBox x:Name="Box_Genre" Width="200"></TextBox>
+            <Label Width="210" FontWeight="DemiBold">SubGenre:</Label>
+            <TextBox x:Name="Box_SubGenre" Width="200"></TextBox>
+            <Label Width="210" FontWeight="DemiBold">Height:</Label>
+            <TextBox x:Name="Box_Height" Width="200"></TextBox>
+            <Label Width="210"  FontWeight="DemiBold">Publisher:</Label>
+            <TextBox x:Name="Box_Publisher" Width="200"></TextBox>
+            <Label Width="210" FontWeight="DemiBold">Total Count:</Label>
+            <TextBox x:Name="Box_Total_Count" Width="200"></TextBox>
+            <Label Width="210" FontWeight="DemiBold">Current Count:</Label>
+            <TextBox x:Name="Box_Current_Count" Width="200"></TextBox>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="Button_Cancel" Width="90" Margin="5,20,20,0" Click="Button_Cancel_Click">Cancel</Button>
+                <Button x:Name="Button_Change" Width="90" Margin="0,20,0,0" Click="Button_Change_Click">Create</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

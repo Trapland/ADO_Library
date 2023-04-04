@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmallAdoProject.BookInteraction"
         mc:Ignorable="d"
-        Title="GiveBook" Height="450" Width="800">
+        Title="GiveBook" Height="450" Width="300" Loaded="Window_Loaded">
     <Grid>
-        
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label FontWeight="DemiBold">User</Label>
+            <ComboBox SelectedIndex="0" Width="200" Height="30" x:Name="Combo_Users" ItemsSource="{Binding Users}" SelectionChanged="Combo_Users_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Name}"/>
+                            <TextBlock Margin="0,0,10,0" Text="{Binding Path=Surname}"/>
+                            <TextBlock Margin="0,0,10,0" Text="{Binding Path=Email}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="Button_Cancel" Width="90" Margin="0,20,20,0" Click="Button_Cancel_Click">Cancel</Button>
+                <Button x:Name="Button_Give" Width="90" Margin="0,20,0,0" Click="Button_Give_Click">Give</Button>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

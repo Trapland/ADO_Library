@@ -25,26 +25,21 @@ namespace SmallAdoProject.Manager
     public partial class BooksMenuWindow : Window
     {
         public ObservableCollection<Entity.Book> Books { get; set; }
+        public ObservableCollection<Entity.User> Users { get; set; }
         private SqlConnection _connection;
-        private List<String> Category;
         private int SelectedCategory;
         public BookInteraction.AddNewBook dialogAdd;
         public BookInteraction.GiveBook dialogGive;
         public BookInteraction.ReturnBook dialogReturn;
+        public BookInteraction.AddUser dialogAddUser;
+        public BookInteraction.EditBook dialogEditBook;
         public BooksMenuWindow()
         {
             InitializeComponent();
-            Books = new ();
+            Books = new();
+            Users = new();
             DataContext = this;
             _connection = new(App.Connection);
-            Category = new List<String>
-            {
-                "Title",
-                "Author",
-                "Genre",
-                "SubGenre",
-                "Publisher"
-            };
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -59,6 +54,15 @@ namespace SmallAdoProject.Manager
                     while (reader.Read())
                     {
                         Books.Add(new Entity.Book(reader));
+                    }
+                }
+                cmd.Dispose();
+                cmd.CommandText = "SELECT U.* FROM Users U";
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Users.Add(new Entity.User(reader));
                     }
                 }
                 cmd.Dispose();
@@ -93,7 +97,7 @@ namespace SmallAdoProject.Manager
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show(ex.Message, "Create error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, "Create Book error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
@@ -104,23 +108,172 @@ namespace SmallAdoProject.Manager
 
         private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            dialogEditBook = new BookInteraction.EditBook() { Owner = this };
+            dialogEditBook.book = lv.SelectedItem as Entity.Book;
+            if (dialogEditBook.ShowDialog() == true)
+            {
+                String sql = $"Update Books SET Title = N'{dialogEditBook.book.Title}', Author = N'{dialogEditBook.book.Author}', Genre = N'{dialogEditBook.book.Genre}' , SubGenre = N'{dialogEditBook.book.SubGenre}', Height = {dialogEditBook.book.Height}, Publisher = N'{dialogEditBook.book.Publisher}', Total_Count = {dialogEditBook.book.Total_Count}, Cuurent_Count = {dialogEditBook.book.Cuurent_Count} WHERE ID = '{dialogEditBook.book.ID}'";
+                using SqlCommand cmd = new(sql, _connection);
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    foreach (var item in Books)
+                    {
+                        if (item.ID == dialogEditBook.book.ID)
+                        {
+                            Books.Remove(item);
+                            break;
+                        }
+                    }
+                    Books.Add(dialogEditBook.book);
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show(ex.Message, "Create Book error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Operation Cancelled");
+            }
         }
 
         private void Button_book_return_Click(object sender, RoutedEventArgs e)
         {
+            if (lv.SelectedItem != null && lv.SelectedItem is Entity.Book book && book.Cuurent_Count < book.Total_Count)
+            {
+                dialogReturn = new BookInteraction.ReturnBook() { Owner = this };
+                if (dialogReturn.ShowDialog() == true)
+                {
 
+                    String sql = $"Update Users SET Name = N'{dialogReturn.user.Name}', Surname = N'{dialogReturn.user.Surname}', Email = N'{dialogReturn.user.Email}' , Book1 = N'{dialogReturn.user.Book1}', Book2 = N'{dialogReturn.user.Book2}', Book3 = N'{dialogReturn.user.Book3}' WHERE Id = '{dialogReturn.user.Id}'";
+                    try
+                    {
+                        using SqlCommand cmd = new(sql, _connection);
+                        cmd.ExecuteNonQuery();
+                        foreach (var item in Users)
+                        {
+                            if (item.Id == dialogReturn.user.Id)
+                            {
+                                Users.Remove(item);
+                                break;
+                            }
+                        }
+                        Users.Add(dialogReturn.user);
+                        cmd.Dispose();
+
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Update User error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    String sqlBook = $"Update Books SET Cuurent_Count ={book.Cuurent_Count} WHERE ID='{book.ID}'";
+                    using SqlCommand cmdBook = new(sqlBook, _connection);
+                    cmdBook.ExecuteNonQuery();
+                    foreach (var item in Books)
+                    {
+                        if (item.ID == book.ID)
+                        {
+                            Books.Remove(item);
+                            break;
+                        }
+                    }
+                    Books.Add(book);
+                    cmdBook.Dispose();
+
+                }
+                else
+                {
+                    MessageBox.Show("Operation Cancelled");
+                }
+            }
         }
 
         private void Button_book_give_Click(object sender, RoutedEventArgs e)
         {
+            if (lv.SelectedItem != null && lv.SelectedItem is Entity.Book book && book.Cuurent_Count > 0)
+            {
+                dialogGive = new BookInteraction.GiveBook() { Owner = this };
+                if (dialogGive.ShowDialog() == true)
+                {
 
+                    String sql = $"Update Users SET Name = N'{dialogGive.user.Name}', Surname = N'{dialogGive.user.Surname}', Email = N'{dialogGive.user.Email}' , Book1 = N'{dialogGive.user.Book1}', Book2 = N'{dialogGive.user.Book2}', Book3 = N'{dialogGive.user.Book3}' WHERE Id = '{dialogGive.user.Id}'";
+                    try
+                    {
+                        using SqlCommand cmd = new(sql, _connection);
+                        cmd.ExecuteNonQuery();
+                        foreach (var item in Users)
+                        {
+                            if (item.Id == dialogGive.user.Id)
+                            {
+                                Users.Remove(item);
+                                break;
+                            }
+                        }
+                        Users.Add(dialogGive.user);
+                        cmd.Dispose();
+
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Update User error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    String sqlBook = $"Update Books SET Cuurent_Count ={book.Cuurent_Count} WHERE ID='{book.ID}'";
+                    using SqlCommand cmdBook = new(sqlBook, _connection);
+                    cmdBook.ExecuteNonQuery();
+                    foreach (var item in Books)
+                    {
+                        if (item.ID == book.ID)
+                        {
+                            Books.Remove(item);
+                            break;
+                        }
+                    }
+                    Books.Add(book);
+                    cmdBook.Dispose();
+
+                }
+                else
+                {
+                    MessageBox.Show("Operation Cancelled");
+                }
+            }
+        }
+
+        private void Button_user_create_Click(object sender, RoutedEventArgs e)
+        {
+            dialogAddUser = new BookInteraction.AddUser() { Owner = this };
+            if (dialogAddUser.ShowDialog() == true)
+            {
+                String sql = "INSERT INTO Users(Id,Name,Surname,Email,Book1,Book2,Book3) VALUES (@id, @name, @surname, @email, @book1, @book2, @book3)";
+                using SqlCommand cmd = new(sql, _connection);
+                cmd.Parameters.AddWithValue("@id", dialogAddUser.user.Id);
+                cmd.Parameters.AddWithValue("@name", dialogAddUser.user.Name);
+                cmd.Parameters.AddWithValue("@surname", dialogAddUser.user.Surname);
+                cmd.Parameters.AddWithValue("@email", dialogAddUser.user.Email);
+                cmd.Parameters.AddWithValue("@book1", dialogAddUser.user.Book1);
+                cmd.Parameters.AddWithValue("@book2", dialogAddUser.user.Book2);
+                cmd.Parameters.AddWithValue("@book3", dialogAddUser.user.Book3);
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    Users.Add(dialogAddUser.user);
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show(ex.Message, "Create User error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Operation Cancelled");
+            }
         }
 
         GridViewColumnHeader _lastHeaderClicked = null;
         ListSortDirection _lastDirection = ListSortDirection.Ascending;
 
-        void GridViewColumnHeaderClickedHandler(object sender,RoutedEventArgs e)
+        void GridViewColumnHeaderClickedHandler(object sender, RoutedEventArgs e)
         {
             var headerClicked = e.OriginalSource as GridViewColumnHeader;
             ListSortDirection direction;
@@ -193,7 +346,7 @@ namespace SmallAdoProject.Manager
         private void ComboBox_SearchCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedCategory = ComboBox_SearchCategory.SelectedIndex;
-            if(this.IsLoaded)
+            if (this.IsLoaded)
                 Search();
         }
 
