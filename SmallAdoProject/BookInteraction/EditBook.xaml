@@ -22,11 +22,9 @@
             <TextBox x:Name="Box_Publisher" Width="200"></TextBox>
             <Label Width="210" FontWeight="DemiBold">Total Count:</Label>
             <TextBox x:Name="Box_Total_Count" Width="200"></TextBox>
-            <Label Width="210" FontWeight="DemiBold">Current Count:</Label>
-            <TextBox x:Name="Box_Current_Count" Width="200"></TextBox>
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="Button_Cancel" Width="90" Margin="5,20,20,0" Click="Button_Cancel_Click">Cancel</Button>
-                <Button x:Name="Button_Change" Width="90" Margin="0,20,0,0" Click="Button_Change_Click">Create</Button>
+                <Button x:Name="Button_Change" Width="90" Margin="0,20,0,0" Click="Button_Change_Click">Change</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

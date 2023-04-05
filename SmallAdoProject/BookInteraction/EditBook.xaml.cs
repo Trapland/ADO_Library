@@ -65,12 +65,13 @@ namespace SmallAdoProject.BookInteraction
             book.SubGenre = Box_SubGenre.Text;
             book.Height = Convert.ToInt32(Box_Height.Text);
             book.Publisher = Box_Publisher.Text;
+            if (Convert.ToInt32(Box_Total_Count.Text) > book.Total_Count)
+            {
+                book.Cuurent_Count += Convert.ToInt32(Box_Total_Count.Text) - book.Total_Count;
+            }
             book.Total_Count = Convert.ToInt32(Box_Total_Count.Text);
             if (book.Total_Count < 0)
                 book.Total_Count = 1;
-            book.Cuurent_Count = Convert.ToInt32(Box_Current_Count.Text);
-            if (book.Cuurent_Count > book.Total_Count)
-                book.Cuurent_Count = book.Total_Count;
             foreach (var item in OwnerBooks)
             {
                 if (item.Title == book.Title && item.ID != book.ID)

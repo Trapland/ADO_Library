@@ -112,8 +112,17 @@ namespace SmallAdoProject.Manager
             dialogEditBook.book = lv.SelectedItem as Entity.Book;
             if (dialogEditBook.ShowDialog() == true)
             {
-                String sql = $"Update Books SET Title = N'{dialogEditBook.book.Title}', Author = N'{dialogEditBook.book.Author}', Genre = N'{dialogEditBook.book.Genre}' , SubGenre = N'{dialogEditBook.book.SubGenre}', Height = {dialogEditBook.book.Height}, Publisher = N'{dialogEditBook.book.Publisher}', Total_Count = {dialogEditBook.book.Total_Count}, Cuurent_Count = {dialogEditBook.book.Cuurent_Count} WHERE ID = '{dialogEditBook.book.ID}'";
+                String sql = $"Update Books SET ID=@id, Title=@title, Author=@author, Genre=@genre, SubGenre=@subgenre, Height=@height, Publisher=@publisher, Total_Count=@total_count, Cuurent_Count=@cuurent_count WHERE ID = '{dialogEditBook.book.ID}'";
                 using SqlCommand cmd = new(sql, _connection);
+                cmd.Parameters.AddWithValue("@id", dialogEditBook.book.ID);
+                cmd.Parameters.AddWithValue("@title", dialogEditBook.book.Title);
+                cmd.Parameters.AddWithValue("@author", dialogEditBook.book.Author);
+                cmd.Parameters.AddWithValue("@genre", dialogEditBook.book.Genre);
+                cmd.Parameters.AddWithValue("@subgenre", dialogEditBook.book.SubGenre);
+                cmd.Parameters.AddWithValue("@height", dialogEditBook.book.Height);
+                cmd.Parameters.AddWithValue("@publisher", dialogEditBook.book.Publisher);
+                cmd.Parameters.AddWithValue("@total_count", dialogEditBook.book.Total_Count);
+                cmd.Parameters.AddWithValue("@cuurent_count", dialogEditBook.book.Cuurent_Count);
                 try
                 {
                     cmd.ExecuteNonQuery();
@@ -146,10 +155,17 @@ namespace SmallAdoProject.Manager
                 if (dialogReturn.ShowDialog() == true)
                 {
 
-                    String sql = $"Update Users SET Name = N'{dialogReturn.user.Name}', Surname = N'{dialogReturn.user.Surname}', Email = N'{dialogReturn.user.Email}' , Book1 = N'{dialogReturn.user.Book1}', Book2 = N'{dialogReturn.user.Book2}', Book3 = N'{dialogReturn.user.Book3}' WHERE Id = '{dialogReturn.user.Id}'";
+                    String sql = $"Update Users SET Id=@id, Name=@name, Surname=@surname, Email=@email, Book1=@book1, Book2=@book2, Book3=@book3 WHERE Id = '{dialogReturn.user.Id}'";
                     try
                     {
                         using SqlCommand cmd = new(sql, _connection);
+                        cmd.Parameters.AddWithValue("@id", dialogReturn.user.Id);
+                        cmd.Parameters.AddWithValue("@name", dialogReturn.user.Name);
+                        cmd.Parameters.AddWithValue("@surname", dialogReturn.user.Surname);
+                        cmd.Parameters.AddWithValue("@email", dialogReturn.user.Email);
+                        cmd.Parameters.AddWithValue("@book1", dialogReturn.user.Book1);
+                        cmd.Parameters.AddWithValue("@book2", dialogReturn.user.Book2);
+                        cmd.Parameters.AddWithValue("@book3", dialogReturn.user.Book3);
                         cmd.ExecuteNonQuery();
                         foreach (var item in Users)
                         {
@@ -197,10 +213,13 @@ namespace SmallAdoProject.Manager
                 if (dialogGive.ShowDialog() == true)
                 {
 
-                    String sql = $"Update Users SET Name = N'{dialogGive.user.Name}', Surname = N'{dialogGive.user.Surname}', Email = N'{dialogGive.user.Email}' , Book1 = N'{dialogGive.user.Book1}', Book2 = N'{dialogGive.user.Book2}', Book3 = N'{dialogGive.user.Book3}' WHERE Id = '{dialogGive.user.Id}'";
+                    String sql = $"Update Users SET Book1=@book1, Book2=@book2, Book3=@book3 WHERE Id = '{dialogGive.user.Id}'";
                     try
                     {
                         using SqlCommand cmd = new(sql, _connection);
+                        cmd.Parameters.AddWithValue("@book1", dialogGive.user.Book1);
+                        cmd.Parameters.AddWithValue("@book2", dialogGive.user.Book2);
+                        cmd.Parameters.AddWithValue("@book3", dialogGive.user.Book3);
                         cmd.ExecuteNonQuery();
                         foreach (var item in Users)
                         {
@@ -217,6 +236,7 @@ namespace SmallAdoProject.Manager
                     catch (SqlException ex)
                     {
                         MessageBox.Show(ex.Message, "Update User error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
                     }
                     String sqlBook = $"Update Books SET Cuurent_Count ={book.Cuurent_Count} WHERE ID='{book.ID}'";
                     using SqlCommand cmdBook = new(sqlBook, _connection);
