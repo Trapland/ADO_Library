@@ -48,7 +48,6 @@ namespace SmallAdoProject.BookInteraction
             Box_Height.Text = book.Height.ToString();
             Box_Publisher.Text = book.Publisher;
             Box_Total_Count.Text = book.Total_Count.ToString();
-            Box_Current_Count.Text = book.Cuurent_Count.ToString();
         }
 
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)

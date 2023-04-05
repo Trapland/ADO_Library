@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:SmallAdoProject"
              StartupUri="Manager/ManagerLoginWindow.xaml">
              <!--StartupUri="AdminWindows/AdminPanelLogin.xaml">-->
+             
     <Application.Resources>
          
     </Application.Resources>
